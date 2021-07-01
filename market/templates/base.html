@@ -14,7 +14,7 @@
    <body>
       <!-- Navbar here -->
       <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Jim Shaped Coding Market</a>
+        <a class="navbar-brand" href="#">Flask Market</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,7 +24,7 @@
                     <a class="nav-link" href="{{ url_for('home_page') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('home_page') }}">Market</a>
+                    <a class="nav-link" href="{{ url_for('market_page') }}">Market</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -38,9 +38,22 @@
         </div>
     </nav>
       <!-- Future Content here -->
-      {% block content %}
-            
-        {% endblock %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <button type="button" class="m1-2 mb-1 close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endswith %}
+
+    {% block content %}
+        
+    {% endblock %}
 
       
       <!-- Optional JavaScript -->
